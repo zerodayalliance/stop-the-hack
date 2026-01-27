@@ -1,26 +1,348 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0f;
+  --foreground: #e0e0e0;
+  --matrix-green: #00ff41;
+  --matrix-green-dim: #00c437;
+  --cyber-yellow: #ffea00;
+  --warning-red: #ff0040;
+  --neon-blue: #00d4ff;
+  --neon-purple: #b400ff;
+  --glass-bg: rgba(10, 10, 20, 0.7);
+  --glass-border: rgba(0, 255, 65, 0.2);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-matrix-green: var(--matrix-green);
+  --color-matrix-green-dim: var(--matrix-green-dim);
+  --color-cyber-yellow: var(--cyber-yellow);
+  --color-warning-red: var(--warning-red);
+  --color-neon-blue: var(--neon-blue);
+  --color-neon-purple: var(--neon-purple);
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--background);
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  background: repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 1px,
+      rgba(0, 0, 0, 0.15) 1px,
+      rgba(0, 0, 0, 0.15) 2px);
+  animation: scanline-scroll 8s linear infinite;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.3) 100%);
+}
+
+@keyframes scanline-scroll {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 100px;
+  }
+}
+
+.glitch {
+  position: relative;
+  animation: glitch-skew 2s infinite linear alternate-reverse;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--warning-red);
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--neon-blue);
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation: glitch-anim2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  }
+
+  20% {
+    clip-path: polygon(0 15%, 100% 15%, 100% 50%, 0 50%);
+  }
+
+  40% {
+    clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%);
+  }
+
+  60% {
+    clip-path: polygon(0 25%, 100% 25%, 100% 45%, 0 45%);
+  }
+
+  80% {
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  }
+
+  100% {
+    clip-path: polygon(0 20%, 100% 20%, 100% 55%, 0 55%);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  }
+
+  20% {
+    clip-path: polygon(0 70%, 100% 70%, 100% 95%, 0 95%);
+  }
+
+  40% {
+    clip-path: polygon(0 60%, 100% 60%, 100% 85%, 0 85%);
+  }
+
+  60% {
+    clip-path: polygon(0 75%, 100% 75%, 100% 100%, 0 100%);
+  }
+
+  80% {
+    clip-path: polygon(0 65%, 100% 65%, 100% 90%, 0 90%);
+  }
+
+  100% {
+    clip-path: polygon(0 55%, 100% 55%, 100% 80%, 0 80%);
+  }
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg);
+  }
+
+  10% {
+    transform: skew(-0.5deg);
+  }
+
+  20% {
+    transform: skew(0.5deg);
+  }
+
+  30% {
+    transform: skew(0deg);
+  }
+
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+.glow-green {
+  text-shadow:
+    0 0 5px var(--matrix-green),
+    0 0 10px var(--matrix-green),
+    0 0 20px var(--matrix-green),
+    0 0 40px var(--matrix-green);
+}
+
+.glow-red {
+  text-shadow:
+    0 0 5px var(--warning-red),
+    0 0 10px var(--warning-red),
+    0 0 20px var(--warning-red),
+    0 0 40px var(--warning-red);
+}
+
+.glow-yellow {
+  text-shadow:
+    0 0 5px var(--cyber-yellow),
+    0 0 10px var(--cyber-yellow),
+    0 0 20px var(--cyber-yellow);
+}
+
+.glow-blue {
+  text-shadow:
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-blue),
+    0 0 20px var(--neon-blue);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(0, 255, 65, 0.03);
+}
+
+.glass-hover:hover {
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 255, 65, 0.15),
+    inset 0 0 30px rgba(0, 255, 65, 0.05);
+}
+
+.neon-border {
+  border: 2px solid var(--matrix-green);
+  box-shadow:
+    0 0 5px var(--matrix-green),
+    0 0 10px var(--matrix-green),
+    inset 0 0 5px rgba(0, 255, 65, 0.1);
+}
+
+.neon-border-red {
+  border: 2px solid var(--warning-red);
+  box-shadow:
+    0 0 5px var(--warning-red),
+    0 0 10px var(--warning-red),
+    inset 0 0 5px rgba(255, 0, 64, 0.1);
+}
+
+.neon-border-yellow {
+  border: 2px solid var(--cyber-yellow);
+  box-shadow:
+    0 0 5px var(--cyber-yellow),
+    0 0 10px var(--cyber-yellow),
+    inset 0 0 5px rgba(255, 234, 0, 0.1);
+}
+
+.cyber-input {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+  border-color: var(--matrix-green);
+  box-shadow:
+    0 0 10px var(--matrix-green),
+    0 0 20px rgba(0, 255, 65, 0.3),
+    inset 0 0 10px rgba(0, 255, 65, 0.05);
+  outline: none;
+}
+
+@keyframes critical-flash {
+
+  0%,
+  100% {
+    background: var(--background);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    background: rgba(255, 0, 64, 0.15);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    background: rgba(255, 0, 64, 0.3);
+  }
+}
+
+.critical-flash {
+  animation: critical-flash 0.8s ease-in-out;
+}
+
+.progress-bar-bg {
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--matrix-green-dim);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--matrix-green);
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
 }

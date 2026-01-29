@@ -9,7 +9,6 @@ import {
   IconShieldX,
   IconAlertTriangle,
   IconRefresh,
-  IconLock,
 } from "@tabler/icons-react";
 import {
   analyzePassword,
@@ -60,7 +59,7 @@ export default function Home() {
       />
 
       <main className="relative z-10 min-h-screen flex flex-col">
-        <header className="pt-12 pb-8 text-center">
+        <header className="pt-10 pb-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -76,11 +75,12 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4"
+            className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto px-4"
             style={{ fontFamily: "var(--font-jetbrains), monospace" }}
           >
-            Test your password against our AI.
-            <span className="text-warning-red font-bold">
+            Test your password against common cracking techniques to see how
+            secure you really are?
+            <span className="block text-warning-red font-bold">
               {" "}
               (Do NOT use your real banking password!)
             </span>
@@ -166,12 +166,12 @@ export default function Home() {
               className="text-matrix-green group-hover:rotate-180 transition-transform duration-500"
             />
             <span className="text-lg font-bold tracking-wider text-gray-300 group-hover:text-matrix-green transition-colors">
-              RESET TERMINAL
+              RESET
             </span>
           </motion.button>
         </section>
 
-        <footer className="sticky bottom-0 py-4 glass border-t border-(--matrix-green)/20">
+        <footer className="bottom-0 py-4 glass border-t border-(--matrix-green)/20">
           <div className="text-center">
             <p
               className="text-sm text-gray-500 tracking-widest"
@@ -183,11 +183,11 @@ export default function Home() {
                   href="https://zerodayalliance.tech"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="hover:underline"
                 >
                   ZeroDay Alliance
                 </a>
-              </span>{" "}
-              | <span className="text-gray-400">SNU, Kolkata</span>
+              </span>
             </p>
           </div>
         </footer>
@@ -279,15 +279,15 @@ function CrackTimeDisplay({ analysis }: { analysis: PasswordAnalysis }) {
     >
       <div className="flex items-center justify-center gap-4 mb-4">
         <motion.div
-          animate={{
-            rotate: analysis.strengthLevel === "fortress" ? [0, 360] : 0,
-            scale: analysis.strengthLevel === "critical" ? [1, 1.1, 1] : 1,
-          }}
-          transition={{
-            duration: analysis.strengthLevel === "fortress" ? 3 : 0.5,
-            repeat: analysis.strengthLevel === "fortress" ? Infinity : 0,
-            ease: "linear",
-          }}
+        // animate={{
+        //   rotate: analysis.strengthLevel === "fortress" ? [0, 360] : 0,
+        //   scale: analysis.strengthLevel === "critical" ? [1, 1.1, 1] : 1,
+        // }}
+        // transition={{
+        //   duration: analysis.strengthLevel === "fortress" ? 3 : 0.5,
+        //   repeat: analysis.strengthLevel === "fortress" ? Infinity : 0,
+        //   ease: "linear",
+        // }}
         >
           {getIcon()}
         </motion.div>
@@ -313,7 +313,7 @@ function CrackTimeDisplay({ analysis }: { analysis: PasswordAnalysis }) {
         {analysis.crackTimeDisplay}
       </motion.div>
 
-      {analysis.strengthLevel === "fortress" && (
+      {/* {analysis.strengthLevel === "fortress" && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -321,7 +321,7 @@ function CrackTimeDisplay({ analysis }: { analysis: PasswordAnalysis }) {
         >
           <IconLock size={32} className="text-matrix-green animate-pulse" />
         </motion.div>
-      )}
+      )} */}
     </div>
   );
 }

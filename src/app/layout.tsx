@@ -13,16 +13,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Password Strength Analyzer | ZeroDay Alliance",
+  title: "Stop The Hack | ZeroDay Alliance",
   description:
-    "Test your password strength against our AI-powered analyzer. Find out how hackable you are! Built by ZeroDay Alliance, SNU Kolkata.",
+    "Test your password strength against common cracking techniques and find out how hackable you are! An interactive cybersecurity awareness game by ZeroDay Alliance.",
   keywords: [
     "password",
-    "security",
-    "cybersecurity",
     "strength",
     "analyzer",
-    "hacker",
+    "security",
+    "cybersecurity",
+    "game",
+    "ZeroDay Alliance",
   ],
 };
 

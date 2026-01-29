@@ -201,8 +201,8 @@ function formatCrackTimeDisplay(
 
   if (timeUpper.includes("CENTUR")) {
     return timeUpper
-      .replace("CENTURIES", "🔒 CENTURIES")
-      .replace("CENTURY", "🔒 CENTURY");
+      .replace("CENTURIES", "CENTURIES")
+      .replace("CENTURY", "CENTURY");
   }
 
   return timeUpper;

@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Stop The Hack | ZeroDay Alliance",
   description:
-    "Test your password strength against common cracking techniques and find out how hackable you are! An interactive cybersecurity awareness game by ZeroDay Alliance.",
+    "Test your password against realistic password strength estimation techniques to see how secure you really are? An interactive cybersecurity awareness game by ZeroDay Alliance.",
   keywords: [
     "password",
     "strength",
